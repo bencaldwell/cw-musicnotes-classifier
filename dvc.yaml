@@ -1,0 +1,9 @@
+stages:
+  generate:
+    cmd: python .\src\generate.py data/raw/
+    deps:
+    - .\src\generate.py
+    params:
+    - generate.seed
+    outs:
+    - data/raw

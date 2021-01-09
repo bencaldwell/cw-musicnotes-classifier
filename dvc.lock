@@ -1,0 +1,14 @@
+generate:
+  cmd: python .\src\generate.py data/raw/
+  deps:
+  - path: .\src\generate.py
+    md5: 92c248ae4cff87853c6c5109d4dd8d0b
+    size: 52347
+  params:
+    params.yaml:
+      generate.seed: 123
+  outs:
+  - path: data/raw
+    md5: d751713988987e9331980363e24189ce.dir
+    size: 0
+    nfiles: 0
