@@ -2,13 +2,16 @@ generate:
   cmd: python .\src\generate.py data/raw/
   deps:
   - path: .\src\generate.py
-    md5: 92c248ae4cff87853c6c5109d4dd8d0b
-    size: 52347
+    md5: e7c142365c90618e6f0d094d6c696345
+    size: 956
+  - path: freq_table.html
+    md5: 6c835e3ddedf785b7f66ecdea03a5878
+    size: 59888
   params:
     params.yaml:
       generate.seed: 123
   outs:
   - path: data/raw
-    md5: d751713988987e9331980363e24189ce.dir
-    size: 0
-    nfiles: 0
+    md5: a3b06adb2305b71f30a5d5fdc1cbfce2.dir
+    size: 2753
+    nfiles: 1

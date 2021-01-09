@@ -3,6 +3,7 @@ stages:
     cmd: python .\src\generate.py data/raw/
     deps:
     - .\src\generate.py
+    - freq_table.html
     params:
     - generate.seed
     outs:
