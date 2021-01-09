@@ -1,3 +1,4 @@
+from io import UnsupportedOperation
 import os
 import sys
 import pandas as pd
@@ -13,6 +14,9 @@ def load_from_table():
     df = df[['Scientific name[5]', 'Frequency (Hz) (Equal temperament) [6]']]
     df.columns = ['name', 'freq']
     return df
+
+def generate_random_tone():
+    raise UnsupportedOperation
 
 if __name__ == "__main__":
     
@@ -30,6 +34,8 @@ if __name__ == "__main__":
 
     df = load_from_table()
     df.to_csv(freq_file)
+
+    generate_random_tone()
 
 
 
