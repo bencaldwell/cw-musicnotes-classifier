@@ -5,8 +5,10 @@ import argparse
 import yaml
 import numpy as np
 import tensorflow as tf
+from sklearn.model_selection import train_test_split
 
-def save_tfrecords(df, out_file):
+def save_tfrecords(df, out_dir):
+    out_file = os.path.join(out_dir, 'features.tfrecords')
     with tf.io.TFRecordWriter(out_file) as writer:
         for i, row in df.iterrows():
             label = row.pop('label')
@@ -37,14 +39,19 @@ if __name__ == "__main__":
         sys.exit(1)
 
     input_file = os.path.abspath(sys.argv[1])
-    out_folder = os.path.abspath(sys.argv[2])
-    os.makedirs(out_folder, exist_ok=True)
-    out_file = os.path.join(out_folder, 'features.tfrecords')
+    out_dir = os.path.abspath(sys.argv[2])
+    train_dir = os.path.join(out_dir, 'train')
+    test_dir = os.path.join(out_dir, 'test')
+    os.makedirs(train_dir, exist_ok=True)
+    os.makedirs(test_dir, exist_ok=True)
+    
     df = pd.read_csv(input_file)
-
     df = encode_categories(df)
 
-    save_tfrecords(df, out_file)
+    df_train, df_test = train_test_split(df, test_size=0.2)
+
+    save_tfrecords(df_train, train_dir)
+    save_tfrecords(df_test, test_dir)
     
 
 

@@ -17,3 +17,13 @@ stages:
       - store_features
     outs:
       - data/features
+  train:
+    cmd: python ./src/train.py data/features/ data/models/
+    deps:
+      - src/train.py
+      - data/features/features.tfrecords
+    params:
+      - train
+      - generate.sample_freq
+    outs:
+      - data/models
