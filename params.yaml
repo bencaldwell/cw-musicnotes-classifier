@@ -3,7 +3,7 @@ generate:
   sample_freq: 50000
 store_features:
 train:
-  batch_size: 10
+  batch_size: 1
   epochs: 1
   feature_size: 50000
   num_classes: 108 # number of notes

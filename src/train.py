@@ -59,6 +59,7 @@ def model(feature_size, num_classes):
     model.add(layers.Conv1D(filters=64, kernel_size=3))
     model.add(layers.BatchNormalization())
     model.add(layers.Dropout(0.5))
+    model.add(layers.MaxPooling1D(pool_size=100))
     model.add(layers.Flatten())
     model.add(layers.ReLU())
     model.add(layers.Dense(num_classes, activation="softmax"))
