@@ -7,11 +7,21 @@ import numpy as np
 import tensorflow as tf
 
 def save_tfrecords(df, out_file):
-    labels = df.pop('label')
-    dataset = tf.data.Dataset.from_tensor_slices((df.values, labels.values))
-    
-    # with tf.io.TFRecordWriter(out_file) as writer:
-    #     for i,row in df.iterrows():
+    # labels = df.pop('label')
+    # dataset = tf.data.Dataset.from_tensor_slices((df.values, labels.values))
+    with tf.io.TFRecordWriter(out_file) as writer:
+        for i, row in df.iterrows():
+            label = row.pop('label')
+            feature = row.values
+            example = tf.train.Example(
+                features = tf.train.Features(
+                    feature={
+                        'feature': tf.train.Feature(float_list=tf.train.FloatList(value=feature)),
+                        'label': tf.train.Feature(float_list=tf.train.FloatList(value=[label]))
+                    }
+                )
+            )
+            writer.write(example.SerializeToString())
             
 def encode_categories(df):
     df['label'] = pd.Categorical(df['label'])

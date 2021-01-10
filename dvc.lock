@@ -19,16 +19,16 @@ store_features:
   cmd: python ./src/store_features.py data/raw/raw.csv data/features/features.tfrecords
   deps:
   - path: data/raw/raw.csv
-    md5: 20f5019715b678272f672aeebb8fb0c4
-    size: 8473
+    md5: 25a6319e32d61610a1fb5381105f0643
+    size: 99127956
   - path: src/store_features.py
-    md5: 0f3e9b9f65fa52ab6ef0ac13317c5cef
-    size: 1181
+    md5: 889ed3a36a71c2af02be2947f669894a
+    size: 1620
   params:
     params.yaml:
       store_features:
   outs:
   - path: data/features
-    md5: d751713988987e9331980363e24189ce.dir
-    size: 0
-    nfiles: 0
+    md5: a18e8ab947873509e75416f4e549fc83.dir
+    size: 20006400
+    nfiles: 1
