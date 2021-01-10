@@ -18,7 +18,7 @@ generate:
     size: 99127053
     nfiles: 2
 store_features:
-  cmd: python ./src/store_features.py data/raw/raw.csv data/features/features.tfrecords
+  cmd: python ./src/store_features.py data/raw/raw.csv data/features/
   deps:
   - path: data/raw/raw.csv
     md5: aced5ccc6b33220c6c4236c55d36455f
@@ -31,23 +31,24 @@ store_features:
       store_features:
   outs:
   - path: data/features
-    md5: 48890965a14316559f15acb7153c1004.dir
+    md5: 00d4308e0cc4d7a0a3d3af2324c51a58.dir
     size: 20006400
     nfiles: 2
 train:
   cmd: python ./src/train.py data/features/ data/models/
   deps:
-  - path: data/features/features.tfrecords
-    md5: 8609044dfa64c9de64cde8cf27fe9e3f.dir
+  - path: data/features/
+    md5: 00d4308e0cc4d7a0a3d3af2324c51a58.dir
     size: 20006400
     nfiles: 2
   - path: src/train.py
-    md5: 03abbf4c536b1918ce2d8abf9a26ce15
-    size: 1904
+    md5: e5f25bed007f7647cdc71268f05673d1
+    size: 2611
   params:
     params.yaml:
       generate.sample_freq: 50000
       train:
+        batch_size: 10
   outs:
   - path: data/models
     md5: d751713988987e9331980363e24189ce.dir

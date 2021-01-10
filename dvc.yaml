@@ -9,7 +9,7 @@ stages:
     outs:
     - data/raw
   store_features:
-    cmd: python ./src/store_features.py data/raw/raw.csv data/features/features.tfrecords
+    cmd: python ./src/store_features.py data/raw/raw.csv data/features/
     deps:
       - src/store_features.py
       - data/raw/raw.csv
@@ -21,7 +21,7 @@ stages:
     cmd: python ./src/train.py data/features/ data/models/
     deps:
       - src/train.py
-      - data/features/features.tfrecords
+      - data/features/
     params:
       - train
       - generate.sample_freq

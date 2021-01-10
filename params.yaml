@@ -3,5 +3,5 @@ generate:
   sample_freq: 50000
 store_features:
 train:
-  
+  batch_size: 10
     
