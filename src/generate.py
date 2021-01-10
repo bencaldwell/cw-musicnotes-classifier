@@ -15,8 +15,7 @@ def load_from_table():
     df['name'] = df['name'].str.split('[ |/]', expand=True).iloc[:,0]
     return df
 
-def generate_random_tones(df_freq, count=100):
-    sample_freq = int(50e3) # a typical audio sample rate
+def generate_random_tones(df_freq, count, sample_freq):
     x = np.linspace(0, 1, sample_freq)
     rows = [] 
     for i in range(count):
@@ -33,6 +32,8 @@ def generate_random_tones(df_freq, count=100):
 if __name__ == "__main__":
     
     params = yaml.safe_load(open('params.yaml'))['generate']
+    count = int(params['count'])
+    sample_freq = int(params['sample_freq'])
 
     if len(sys.argv) != 2:
         sys.stderr.write("Arguments error. Usage:\n")
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     df_freq = load_from_table()
     df_freq.to_csv(freq_file, index=False)
 
-    df = generate_random_tones(df_freq)
+    df = generate_random_tones(df_freq, count, sample_freq)
     df.to_csv(raw_file, index=False)
 
 

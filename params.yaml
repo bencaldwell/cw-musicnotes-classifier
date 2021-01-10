@@ -1,4 +1,7 @@
 generate:
-  seed: 123
+  count: 100
+  sample_freq: 50000
 store_features:
+train:
+  
     

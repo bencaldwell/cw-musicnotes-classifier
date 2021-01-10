@@ -2,33 +2,35 @@ generate:
   cmd: python .\src\generate.py data/raw/
   deps:
   - path: .\src\generate.py
-    md5: 8c83295931284d92c8784618ce7c4c05
-    size: 1625
+    md5: 99a0b74ebe46083f55d847e39cdd227b
+    size: 1675
   - path: freq_table.html
     md5: 6c835e3ddedf785b7f66ecdea03a5878
     size: 59888
   params:
     params.yaml:
-      generate.seed: 123
+      generate:
+        count: 100
+        sample_freq: 50000
   outs:
   - path: data/raw
-    md5: 9149d806bf1fcba01b9a021a5be34e0f.dir
-    size: 99129657
+    md5: 74efe88b47954a2cc7bb4a4973a2ea39.dir
+    size: 99127053
     nfiles: 2
 store_features:
   cmd: python ./src/store_features.py data/raw/raw.csv data/features/features.tfrecords
   deps:
   - path: data/raw/raw.csv
-    md5: 25a6319e32d61610a1fb5381105f0643
-    size: 99127956
+    md5: aced5ccc6b33220c6c4236c55d36455f
+    size: 99125352
   - path: src/store_features.py
-    md5: 889ed3a36a71c2af02be2947f669894a
-    size: 1620
+    md5: c8442e3af0ff66ed449f9b07cd263bb2
+    size: 1508
   params:
     params.yaml:
       store_features:
   outs:
   - path: data/features
-    md5: a18e8ab947873509e75416f4e549fc83.dir
+    md5: a31b255b9f2aa363a19b935267c2fb92.dir
     size: 20006400
     nfiles: 1

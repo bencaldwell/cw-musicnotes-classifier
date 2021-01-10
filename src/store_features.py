@@ -7,8 +7,6 @@ import numpy as np
 import tensorflow as tf
 
 def save_tfrecords(df, out_file):
-    # labels = df.pop('label')
-    # dataset = tf.data.Dataset.from_tensor_slices((df.values, labels.values))
     with tf.io.TFRecordWriter(out_file) as writer:
         for i, row in df.iterrows():
             label = row.pop('label')

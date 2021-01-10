@@ -5,7 +5,7 @@ stages:
     - .\src\generate.py
     - freq_table.html
     params:
-    - generate.seed
+    - generate
     outs:
     - data/raw
   store_features:
