@@ -4,4 +4,7 @@ generate:
 store_features:
 train:
   batch_size: 10
+  epochs: 1
+  feature_size: 50000
+  num_classes: 108 # number of notes
     

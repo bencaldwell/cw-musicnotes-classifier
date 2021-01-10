@@ -24,6 +24,5 @@ stages:
       - data/features/
     params:
       - train
-      - generate.sample_freq
     outs:
       - data/models

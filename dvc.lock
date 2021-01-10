@@ -42,13 +42,15 @@ train:
     size: 20006400
     nfiles: 2
   - path: src/train.py
-    md5: e5f25bed007f7647cdc71268f05673d1
-    size: 2611
+    md5: 93778f6e0cb2e24cbac2b9c93695384b
+    size: 3727
   params:
     params.yaml:
-      generate.sample_freq: 50000
       train:
         batch_size: 10
+        epochs: 1
+        feature_size: 50000
+        num_classes: 108
   outs:
   - path: data/models
     md5: d751713988987e9331980363e24189ce.dir
