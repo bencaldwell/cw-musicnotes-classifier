@@ -1,5 +1,5 @@
 generate:
-  count: 100
+  count: 1000
   sample_freq: 50000
 store_features:
 train:

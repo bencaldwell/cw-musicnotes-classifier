@@ -9,10 +9,11 @@ stages:
     outs:
     - data/raw
   store_features:
-    cmd: python ./src/store_features.py data/raw/raw.csv data/features/
+    cmd: python ./src/store_features.py data/raw/raw.csv data/raw/freq.csv data/features/
     deps:
       - src/store_features.py
       - data/raw/raw.csv
+      - data/raw/freq.csv
     params:
       - store_features
     outs:
