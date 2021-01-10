@@ -25,18 +25,18 @@ def save_tfrecords(df, out_file):
             writer.write(example.SerializeToString())
 
 
-def train_input_fn(input_dir, feature_size, batch_size):
-    return _input_fn('train', input_dir, feature_size, batch_size)
+def train_input_fn(input_dir, feature_size, num_classes, batch_size):
+    return _input_fn('train', input_dir, feature_size, num_classes, batch_size)
 
 
-def test_input_fn(input_dir, feature_size, batch_size):
-    return _input_fn('test', input_dir, feature_size, batch_size)
+def test_input_fn(input_dir, feature_size, num_classes, batch_size):
+    return _input_fn('test', input_dir, feature_size, num_classes, batch_size)
 
 
-def _input_fn(channel, input_dir, feature_size, batch_size):
+def _input_fn(channel, input_dir, feature_size, num_classes, batch_size):
     feature_description = {
         'feature': tf.io.FixedLenFeature([feature_size], tf.float32),
-        'label': tf.io.FixedLenFeature([1], tf.float32),
+        'label': tf.io.FixedLenFeature([num_classes], tf.float32),
     }
 
     def parse(record):
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     model_dir = os.path.join(model_dir, 'model')
     os.makedirs(model_dir, exist_ok=True)
 
-    ds_list = list(train_input_fn(input_dir, feature_size, batch_size))
+    ds_list = list(train_input_fn(input_dir, feature_size, num_classes, batch_size))
     feature_list = []
     label_list = []
     for feature, label in ds_list:
@@ -104,8 +104,8 @@ if __name__ == "__main__":
     print(model.summary())
 
     history = model.fit(
-        train_input_fn(input_dir, feature_size, batch_size),
+        train_input_fn(input_dir, feature_size, num_classes, batch_size),
         epochs=epochs,
-        validation_data=test_input_fn(input_dir, feature_size, batch_size),
+        validation_data=test_input_fn(input_dir, feature_size, num_classes, batch_size),
         verbose=2
     )
