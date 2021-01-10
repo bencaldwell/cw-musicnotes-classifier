@@ -1,3 +1,4 @@
 generate:
   seed: 123
-  
+store_features:
+    

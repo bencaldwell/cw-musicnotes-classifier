@@ -8,3 +8,12 @@ stages:
     - generate.seed
     outs:
     - data/raw
+  store_features:
+    cmd: python ./src/store_features.py data/raw/raw.csv data/features/features.tfrecords
+    deps:
+      - src/store_features.py
+      - data/raw/raw.csv
+    params:
+      - store_features
+    outs:
+      - data/features

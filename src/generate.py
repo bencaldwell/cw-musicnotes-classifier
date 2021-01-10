@@ -24,7 +24,9 @@ def generate_random_tones(df_freq, count=100):
         label = row.iloc[0]['name']
         freq = float(row.iloc[0]['freq'])
         y = np.sin(x * freq * 2 * np.pi)
-        rows.append({'label': label, 'sample': y})
+        data = dict(zip(x,y))
+        data['label'] = label
+        rows.append(data)
     df = pd.DataFrame(rows)
     return df
 
