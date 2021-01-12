@@ -19,7 +19,7 @@ stages:
     outs:
       - data/features
   train:
-    cmd: python ./src/train.py data/features/ data/models/
+    cmd: python ./src/train.py --train_dir data/features/train --test_dir data/features/test --model_dir data/models/ --metrics_dir data/metrics
     deps:
       - src/train.py
       - data/features/
@@ -27,3 +27,4 @@ stages:
       - train
     outs:
       - data/models
+      - data/metrics

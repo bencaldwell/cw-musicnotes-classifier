@@ -38,15 +38,16 @@ store_features:
     size: 200496000
     nfiles: 2
 train:
-  cmd: python ./src/train.py data/features/ data/models/
+  cmd: python ./src/train.py --train_dir data/features/train --test_dir data/features/test
+    --model_dir data/models/
   deps:
   - path: data/features/
     md5: 9129713fd4b2b3a08270cfe92ba09eee.dir
     size: 200496000
     nfiles: 2
   - path: src/train.py
-    md5: 6596ccac9361b2273c6196df0cc900b1
-    size: 3892
+    md5: bbd57e0cc1c69cae28ac0db9af6a2ae4
+    size: 3810
   params:
     params.yaml:
       train:
