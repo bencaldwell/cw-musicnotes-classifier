@@ -129,7 +129,7 @@ if __name__ == "__main__":
     print(f'metrics available: {history.history.keys()}')
 
     metrics_file = os.path.join(metrics_dir, 'summary.json')
-    with open(metrics_file) as fd:
+    with open(metrics_file, 'w') as fd:
         json.dump({
             "accuracy": float(history.history["accuracy"][-1]),
             "loss": float(history.history["loss"][-1]),
