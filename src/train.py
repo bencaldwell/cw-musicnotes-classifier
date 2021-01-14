@@ -46,10 +46,10 @@ def input_fn(input_dir, feature_size, num_classes, batch_size):
     return ds
 
 
-def model(feature_size, num_classes, kernel_size, pool_size):
+def model(feature_size, num_classes, kernel_size, pool_size, filters):
     model = Sequential()
     model.add(layers.Reshape((feature_size, 1), input_shape=(feature_size,)))
-    model.add(layers.Conv1D(filters=64, kernel_size=kernel_size))
+    model.add(layers.Conv1D(filters=filters, kernel_size=kernel_size))
     model.add(layers.BatchNormalization())
     model.add(layers.Dropout(0.5))
     model.add(layers.MaxPooling1D(pool_size=pool_size))
@@ -88,6 +88,7 @@ if __name__ == "__main__":
     num_classes = int(params['num_classes'])
     kernel_size = int(params['kernel_size'])
     pool_size = int(params['pool_size'])
+    filters = int(params['filters'])
 
     train_dir = os.path.abspath(args.train_dir)
     test_dir = os.path.abspath(args.test_dir)
@@ -112,12 +113,17 @@ if __name__ == "__main__":
         feature_size=feature_size,
         num_classes=num_classes,
         kernel_size=kernel_size,
-        pool_size=pool_size
+        pool_size=pool_size,
+        filters=filters
     )
     print(model.summary())
 
     early_stopping = tf.keras.callbacks.EarlyStopping(
-        monitor='loss', patience=3)
+        monitor='val_loss',
+        patience=3,
+        mode='min',
+        restore_best_weights=True
+    )
 
     start_real = time.time()
     start_process = time.process_time()

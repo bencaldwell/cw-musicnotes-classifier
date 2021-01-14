@@ -9,3 +9,4 @@ train:
   num_classes: 108 # number of notes
   kernel_size: 50
   pool_size: 50
+  filters: 64
