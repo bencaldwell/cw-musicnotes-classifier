@@ -8,4 +8,4 @@ train:
   feature_size: 50000
   num_classes: 108 # number of notes
   kernel_size: 50
-  pool_size: 100
+  pool_size: 50

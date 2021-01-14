@@ -56,11 +56,11 @@ train:
         feature_size: 50000
         num_classes: 108
         kernel_size: 50
-        pool_size: 100
+        pool_size: 50
   outs:
   - path: data/metrics/summary.json
-    md5: af05e5c7d71e8cb051996bb9d2c544bf
-    size: 248
+    md5: 7cdc65352303f9775e753514adc3bc9e
+    size: 280
   - path: data/models
     md5: d751713988987e9331980363e24189ce.dir
     size: 0
