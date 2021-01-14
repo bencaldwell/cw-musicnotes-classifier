@@ -46,10 +46,10 @@ def input_fn(input_dir, feature_size, num_classes, batch_size):
     return ds
 
 
-def model(feature_size, num_classes):
+def model(feature_size, num_classes, kernel_size):
     model = Sequential()
     model.add(layers.Reshape((feature_size, 1), input_shape=(feature_size,)))
-    model.add(layers.Conv1D(filters=64, kernel_size=3))
+    model.add(layers.Conv1D(filters=64, kernel_size=kernel_size))
     model.add(layers.BatchNormalization())
     model.add(layers.Dropout(0.5))
     model.add(layers.MaxPooling1D(pool_size=100))
@@ -86,6 +86,7 @@ if __name__ == "__main__":
     batch_size = int(params['batch_size'])
     epochs = int(params['epochs'])
     num_classes = int(params['num_classes'])
+    kernel_size = int(params['kernel_size'])
 
     train_dir = os.path.abspath(args.train_dir)
     test_dir = os.path.abspath(args.test_dir)
@@ -106,10 +107,15 @@ if __name__ == "__main__":
     print(f"train features shape: {features.shape}")
     print(f'train labels: {np.unique(labels, return_counts=True)}')
 
-    model = model(feature_size, num_classes)
+    model = model(
+        feature_size,
+        num_classes,
+        kernel_size
+    )
     print(model.summary())
 
-    early_stopping = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
+    early_stopping = tf.keras.callbacks.EarlyStopping(
+        monitor='loss', patience=3)
 
     start_real = time.time()
     start_process = time.process_time()
@@ -137,7 +143,6 @@ if __name__ == "__main__":
             "val_loss": float(history.history["val_loss"][-1]),
             "categorical_accuracy": float(history.history["categorical_accuracy"][-1]),
             "val_categorical_accuracy": float(history.history["val_categorical_accuracy"][-1]),
-            "time_real" : end_real - start_real,
+            "time_real": end_real - start_real,
             "time_process": end_process - start_process
         }, fd)
-

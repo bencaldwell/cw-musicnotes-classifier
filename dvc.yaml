@@ -27,4 +27,6 @@ stages:
       - train
     outs:
       - data/models
-      - data/metrics
+    metrics:
+      - data/metrics/summary.json:
+          cache: true

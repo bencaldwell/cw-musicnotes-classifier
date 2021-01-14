@@ -46,8 +46,8 @@ train:
     size: 200496000
     nfiles: 2
   - path: src/train.py
-    md5: 65b401666fb95e4b5e6bf105a126aef1
-    size: 4969
+    md5: fb30f1de67cbe21b83e3ea0c86b5af30
+    size: 5092
   params:
     params.yaml:
       train:
@@ -55,11 +55,11 @@ train:
         epochs: 10
         feature_size: 50000
         num_classes: 108
+        kernel_size: 10
   outs:
-  - path: data/metrics
-    md5: 4922617605d0e6165b6f00da00a6c0b6.dir
-    size: 279
-    nfiles: 1
+  - path: data/metrics/summary.json
+    md5: e208b74d19619737dcb132e74822cf52
+    size: 278
   - path: data/models
     md5: d751713988987e9331980363e24189ce.dir
     size: 0

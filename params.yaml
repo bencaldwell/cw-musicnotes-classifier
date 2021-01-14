@@ -7,4 +7,5 @@ train:
   epochs: 10
   feature_size: 50000
   num_classes: 108 # number of notes
+  kernel_size: 10
     
