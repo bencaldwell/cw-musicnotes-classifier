@@ -55,11 +55,11 @@ train:
         epochs: 10
         feature_size: 50000
         num_classes: 108
-        kernel_size: 10
+        kernel_size: 50
   outs:
   - path: data/metrics/summary.json
-    md5: e208b74d19619737dcb132e74822cf52
-    size: 278
+    md5: ceb4f22cf77809728407e35c6e4114d2
+    size: 279
   - path: data/models
     md5: d751713988987e9331980363e24189ce.dir
     size: 0
