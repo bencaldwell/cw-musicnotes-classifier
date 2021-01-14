@@ -57,11 +57,11 @@ train:
         num_classes: 108
         kernel_size: 50
         pool_size: 50
-        filters: 64
+        filters: 32
   outs:
   - path: data/metrics/summary.json
-    md5: 4983feb7ad12569b7c3ca89f1b6d0af5
-    size: 279
+    md5: 93c08e3617d719c62017530f893289da
+    size: 278
   - path: data/models
     md5: d751713988987e9331980363e24189ce.dir
     size: 0
