@@ -46,13 +46,13 @@ def input_fn(input_dir, feature_size, num_classes, batch_size):
     return ds
 
 
-def model(feature_size, num_classes, kernel_size):
+def model(feature_size, num_classes, kernel_size, pool_size):
     model = Sequential()
     model.add(layers.Reshape((feature_size, 1), input_shape=(feature_size,)))
     model.add(layers.Conv1D(filters=64, kernel_size=kernel_size))
     model.add(layers.BatchNormalization())
     model.add(layers.Dropout(0.5))
-    model.add(layers.MaxPooling1D(pool_size=100))
+    model.add(layers.MaxPooling1D(pool_size=pool_size))
     model.add(layers.Flatten())
     model.add(layers.ReLU())
     model.add(layers.Dense(num_classes, activation="softmax"))
@@ -87,6 +87,7 @@ if __name__ == "__main__":
     epochs = int(params['epochs'])
     num_classes = int(params['num_classes'])
     kernel_size = int(params['kernel_size'])
+    pool_size = int(params['pool_size'])
 
     train_dir = os.path.abspath(args.train_dir)
     test_dir = os.path.abspath(args.test_dir)
@@ -108,9 +109,10 @@ if __name__ == "__main__":
     print(f'train labels: {np.unique(labels, return_counts=True)}')
 
     model = model(
-        feature_size,
-        num_classes,
-        kernel_size
+        feature_size=feature_size,
+        num_classes=num_classes,
+        kernel_size=kernel_size,
+        pool_size=pool_size
     )
     print(model.summary())
 
