@@ -72,7 +72,8 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--train_dir', type=str)
     parser.add_argument('--test_dir', type=str)
-    parser.add_argument('--model_dir', type=str)
+    parser.add_argument('--model_save', type=str)
+    parser.add_argument('--model_load', type=str)
     parser.add_argument('--metrics_dir', type=str)
     return parser.parse_known_args()
 
@@ -94,9 +95,12 @@ if __name__ == "__main__":
     test_dir = os.path.abspath(args.test_dir)
     metrics_dir = os.path.abspath(args.metrics_dir)
     os.makedirs(metrics_dir, exist_ok=True)
-    model_dir = os.path.abspath(args.model_dir)
-    model_dir = os.path.join(model_dir, 'model')
-    os.makedirs(model_dir, exist_ok=True)
+    model_save = os.path.abspath(args.model_save)
+    os.makedirs(model_save, exist_ok=True)
+    if (args.model_load):
+        model_load = os.path.abspath(args.model_load)
+    else:
+        model_load = None
 
     ds_list = list(input_fn(train_dir, feature_size, num_classes, batch_size))
     feature_list = []
@@ -109,13 +113,18 @@ if __name__ == "__main__":
     print(f"train features shape: {features.shape}")
     print(f'train labels: {np.unique(labels, return_counts=True)}')
 
-    model = model(
-        feature_size=feature_size,
-        num_classes=num_classes,
-        kernel_size=kernel_size,
-        pool_size=pool_size,
-        filters=filters
-    )
+    try:
+        model = tf.keras.models.load_model(model_load)
+        print(f'Loading model from {model_load}')
+    except:
+        print(f'Creating new model')
+        model = model(
+            feature_size=feature_size,
+            num_classes=num_classes,
+            kernel_size=kernel_size,
+            pool_size=pool_size,
+            filters=filters
+        )
     print(model.summary())
 
     early_stopping = tf.keras.callbacks.EarlyStopping(
@@ -154,3 +163,5 @@ if __name__ == "__main__":
             "time_real": end_real - start_real,
             "time_process": end_process - start_process
         }, fd)
+
+    model.save(model_save)

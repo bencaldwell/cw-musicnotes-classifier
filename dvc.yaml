@@ -19,14 +19,24 @@ stages:
     outs:
       - data/features
   train:
-    cmd: python ./src/train.py --train_dir data/features/train --test_dir data/features/test --model_dir data/models/ --metrics_dir data/metrics
+    cmd: python ./src/train.py --train_dir data/features/train --test_dir data/features/test --model_load data/models/existing_model --model_save data/models/new_model --metrics_dir data/metrics
     deps:
       - src/train.py
       - data/features/
     params:
       - train
     outs:
-      - data/models
+      - data/models/new_model
     metrics:
       - data/metrics/summary.json:
           cache: true
+  validate:
+    cmd: python ./src/validate.py --test_dir data/features/test --model_load data/models/new_model --predictions_dir data/predictions
+    deps:
+      - ./src/validate.py
+      - data/models/new_model
+    params:
+      - validate
+    outs:
+    - data/predictions/
+    

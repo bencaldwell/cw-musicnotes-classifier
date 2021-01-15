@@ -10,3 +10,4 @@ train:
   kernel_size: 50
   pool_size: 50
   filters: 32
+validate:
